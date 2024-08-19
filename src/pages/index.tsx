@@ -160,7 +160,7 @@ export default function Home() {
                 </td>
               </tr>
               <tr className="bg-zinc-700 border-b border-gray-700">
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white text-white">Google Pixel Phone</th>
+                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">Google Pixel Phone</th>
                 <td className="px-6 py-4">Gray</td>
                 <td className="px-6 py-4">Phone</td>
                 <td className="px-6 py-4">$799</td>
@@ -190,7 +190,7 @@ export default function Home() {
                 </td>
               </tr>
               <tr className="bg-zinc-700 border-b border-gray-700">
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white text-white">Google Pixel Phone</th>
+                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">Google Pixel Phone</th>
                 <td className="px-6 py-4">Gray</td>
                 <td className="px-6 py-4">Phone</td>
                 <td className="px-6 py-4">$799</td>
