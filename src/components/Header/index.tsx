@@ -6,12 +6,12 @@ import { faFile } from "@fortawesome/free-solid-svg-icons"
 
 export default function Header() {
   return (
-    <header className="flex flex-row justify-between w-full h-14 items-center gap-4">
+    <header className="flex flex-row justify-between w-full h-20 py-3 items-center gap-4">
       <Link href={"/"} className="flex flex-row items-center gap-2">
         <FontAwesomeIcon icon={faFile} size="lg" style={{color: "#ffffff",}} />
-        <h1 className="text-slate-50 text-2xl">Carregamento Coluna</h1>
+        <h1 className="text-slate-50 text-2xl device:text-xl">Carregamento Coluna</h1>
       </Link>
-      <nav className="flex flex-row justify-between gap-8 text-white text-lg">
+      <nav className="flex flex-row justify-between gap-8 text-white text-lg device:h-full device:flex-col device:justify-center device:gap-1 device:items-center device:text-base">
         <Dropdown label="Fora Cidade" inline className="p-4 bg-zinc-900 rounded-lg">
           <div className="flex flex-col gap-2">
             <Dropdown.Item href="/">Carregamentos</Dropdown.Item>
