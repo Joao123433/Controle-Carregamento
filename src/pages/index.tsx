@@ -29,7 +29,7 @@ export default function Home() {
         <button className="px-5 py-2 bg-zinc-600 text-white rounded-md hover:brightness-90 device:px-3 device:py-1">Imprimir</button>
         <button className="px-5 py-2 bg-cyan-600 text-white rounded-md hover:brightness-90 device:px-3 device:py-1">Pesquisar</button>
       </section>
-      <section className="py-5 h-90 border-2 flex flex-col items-center gap-4">
+      <section className="py-5 h-90 border-2 border-gray-500 flex flex-col items-center gap-4">
         <h1 className="text-2xl text-white text-center">
           Carregamentos {new Intl.DateTimeFormat("pt-br").format(new Date())}
         </h1>
