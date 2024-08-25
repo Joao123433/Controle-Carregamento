@@ -11,7 +11,7 @@ export default function Header() {
         <h1 className="text-slate-50 text-2xl device:text-xl">Carregamento</h1>
       </Link>
       <nav className="flex flex-row justify-between gap-8 text-white text-lg device:h-full device:flex-col device:justify-center device:gap-1 device:items-center device:text-base">
-        <Dropdown label="Fora Cidade" inline className="p-4 bg-zinc-900 rounded-lg">
+        <Dropdown label="Fora Cidade" inline className="p-2 bg-zinc-900 rounded-lg">
           <div className="flex flex-col gap-2">
             <Dropdown.Item className="text-white" href="/">Carregamentos</Dropdown.Item>
             <Dropdown.Item className="text-white" href="/teste">teste</Dropdown.Item>
@@ -19,7 +19,7 @@ export default function Header() {
             <Dropdown.Item className="text-white">Manual Usuário</Dropdown.Item>
           </div>
         </Dropdown>
-        <Dropdown label="Dentro Cidade" inline className="p-4 bg-zinc-900 rounded-lg">
+        <Dropdown label="Dentro Cidade" inline className="p-2 bg-zinc-900 rounded-lg">
           <div className="flex flex-col gap-2">
             <Dropdown.Item className="text-white" href="/">Carregamentos</Dropdown.Item>
             <Dropdown.Item className="text-white" href="/teste">teste</Dropdown.Item>

@@ -1,7 +1,8 @@
-import { faTruckFast } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faClock, faClockRotateLeft, faPenToSquare, faTruckFast, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { NewShipmentmodal } from "@/components/NewShipmentModal";
+import { Dropdown } from "flowbite-react"
 import Modal from "react-modal"
 import { api } from "@/services/api";
 
@@ -18,6 +19,9 @@ export default function Home() {
   const [newShipmentModalOpen, setNewShipmentModalOpen] = useState(false)
   const [carregamentos, setCarregamentos] = useState<carregamentosType[]>([])
   let count = 0;
+  const dataServidor = new Date();
+  const tresHoraPassado = 3 * 60 * 60 * 1000;
+  const dataReal = new Date(dataServidor.getTime() - tresHoraPassado);
 
   const handleClickOpenModalShipment = () => {
     setNewShipmentModalOpen(true)
@@ -53,7 +57,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col justify-evenly">
             <p>Total de Carregamentos</p>
-            <span>5</span>
+            <span>{carregamentos.length}</span>
           </div>
         </div>
         <div className="overflow-y-scroll w-99 h-2/3">
@@ -77,17 +81,16 @@ export default function Home() {
                     <td className="px-6 py-4 text-center">{new Intl.DateTimeFormat("pt-br").format(new Date(createdat))}</td>
                     <td className="px-6 py-4 text-center">{expedicao}</td>
                     <td className="px-6 py-4 text-center">
-                      <select className="text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 outline-none bg-transparent">
-                        <option defaultValue={0} className="text-black">Choose a country</option>
-                        <option className="text-black" value="US">United States</option>
-                        <option className="text-black" value="CA">Canada</option>
-                        <option className="text-black" value="FR">France</option>
-                        <option className="text-black" value="DE">Germany</option>
-                      </select>
+                      <Dropdown label="" style={{width: "100%", display: "flex", flexDirection: "row-reverse"}} target="w-full" className="p-1 bg-zinc-900 rounded-lg">
+                          <Dropdown.Item className="text-white flex gap-2 min-w-40"><FontAwesomeIcon icon={faPenToSquare} size="lg"/>Editar</Dropdown.Item>
+                          <Dropdown.Item className="text-white flex gap-2 min-w-40"><FontAwesomeIcon icon={faXmark} size="xl"/>Excluir</Dropdown.Item>
+                          <Dropdown.Item className="text-white flex gap-2 min-w-40"><FontAwesomeIcon icon={faCheck} size="lg"/>Finalizar</Dropdown.Item>
+                          <Dropdown.Item className="text-white flex gap-2 min-w-40"><FontAwesomeIcon icon={faClock} size="lg"/>Horaríos</Dropdown.Item>
+                          <Dropdown.Item className="text-white flex gap-2 min-w-40"><FontAwesomeIcon icon={faClockRotateLeft} size="lg"/>Histórico</Dropdown.Item>
+                      </Dropdown>
                     </td>
                   </tr>
-                )
-              })}
+                )})}
             </tbody>
           </table>
         </div>

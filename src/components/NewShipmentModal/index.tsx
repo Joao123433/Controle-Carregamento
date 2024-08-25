@@ -34,25 +34,26 @@ export function NewShipmentmodal({ isOpen, onRequestClose, setCarregamentos }: N
   const addChoiceSelections = () => {
     setSelections((prevState) => [...prevState, ''])
 
-    setOrdemProducao((prevState) => [...prevState, '']);
-    setNomeCliente((prevState) => [...prevState, '']);
-    setDataConclusao((prevState) => [...prevState, '']);
-    setRomaneio((prevState) => [...prevState, '']);
-    setRelatorio((prevState) => [...prevState, '']);
+    setOrdemProducao((prevState) => [...prevState, ''])
+    setNomeCliente((prevState) => [...prevState, ''])
+    setDataConclusao((prevState) => [...prevState, ''])
+    setRomaneio((prevState) => [...prevState, ''])
+    setRelatorio((prevState) => [...prevState, ''])
     
-    setProduto((prevState) => [...prevState, '']);
+    setProduto((prevState) => [...prevState, ''])
+    console.log(selections)
   }
 
   const removeSelection = (index: number) => {
     setSelections((prev) => prev.filter((_, i) => i !== index));
     
-    setOrdemProducao((prevState) => prevState.filter((_, i) => i !== index));
-    setNomeCliente((prevState) => prevState.filter((_, i) => i !== index));
-    setDataConclusao((prevState) => prevState.filter((_, i) => i !== index));
-    setRomaneio((prevState) => prevState.filter((_, i) => i !== index));
-    setRelatorio((prevState) => prevState.filter((_, i) => i !== index));
+    setOrdemProducao((prevState) => prevState.filter((_, i) => i !== index))
+    setNomeCliente((prevState) => prevState.filter((_, i) => i !== index))
+    setDataConclusao((prevState) => prevState.filter((_, i) => i !== index))
+    setRomaneio((prevState) => prevState.filter((_, i) => i !== index))
+    setRelatorio((prevState) => prevState.filter((_, i) => i !== index))
     
-    setProduto((prevState) => prevState.filter((_, i) => i !== index));
+    setProduto((prevState) => prevState.filter((_, i) => i !== index))
   }
 
   const handleSelectChange = (index: number, value: string) => {
@@ -146,15 +147,19 @@ export function NewShipmentmodal({ isOpen, onRequestClose, setCarregamentos }: N
       );
     }
     return null;
-  };
+  }
 
   const saveButton = async (ev: { preventDefault: () => void; }) => {
     ev.preventDefault()
+    
+    const dataServidor = new Date();
+    const tresHoraPassado = 3 * 60 * 60 * 1000;
+    const dataReal = new Date(dataServidor.getTime() - tresHoraPassado);
 
     const response = await api.post("/carregamento", {
       expedicao,
-      createdAt: new Date(),
-      updatedAt: new Date()
+      createdAt: new Date(dataReal),
+      updatedAt: new Date(dataReal)
     })
 
     const carregamento = response.data[0]
@@ -169,8 +174,8 @@ export function NewShipmentmodal({ isOpen, onRequestClose, setCarregamentos }: N
         ordem_producao: Number(ordemProducao[i]),
         nome_cliente: nomeCliente[i] ?? "",
         produto: produto[i] ?? "",
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: new Date(dataReal),
+        updatedAt: new Date(dataReal),
         id_carregamento: Number(id),
         romaneio: Number(romaneio[i]) ?? null,
         relatorio: Number(relatorio[i]) ?? null
@@ -178,6 +183,15 @@ export function NewShipmentmodal({ isOpen, onRequestClose, setCarregamentos }: N
     }
 
     onRequestClose()
+
+    setExpedicao("")
+    setSelections([""])
+    setOrdemProducao([])
+    setNomeCliente([])
+    setDataConclusao([])
+    setRomaneio([])
+    setRelatorio([])
+    setProduto([])
   }
 
   return (
