@@ -5,6 +5,7 @@ import { NewShipmentmodal } from "@/components/NewShipmentModal";
 import { Dropdown } from "flowbite-react"
 import Modal from "react-modal"
 import { api } from "@/services/api";
+import { EditShipmentModal } from "@/components/EditShipmentModal";
 
 interface carregamentosType {
   id: number,
@@ -16,19 +17,36 @@ interface carregamentosType {
 Modal.setAppElement("#__next")
 
 export default function Home() {
-  const [newShipmentModalOpen, setNewShipmentModalOpen] = useState(false)
   const [carregamentos, setCarregamentos] = useState<carregamentosType[]>([])
+  const [newShipmentModalOpen, setNewShipmentModalOpen] = useState(false) // Modal New
+  
+  const [editShipmentModalOpen, setEditShipmentModalOpen] = useState(false) // Modal Edit
+  const [elementEdit, setElementEdit] = useState(0) // id elemento que ira ser editado
+
+  // VARIAVEIS
   let count = 0;
   const dataServidor = new Date();
   const tresHoraPassado = 3 * 60 * 60 * 1000;
   const dataReal = new Date(dataServidor.getTime() - tresHoraPassado);
 
-  const handleClickOpenModalShipment = () => {
+  // NEW MODAL
+  const handleClickOpenNewModalShipment = () => {
     setNewShipmentModalOpen(true)
   }
 
-  const handleClickCloseModalShipment = () => {
+  const handleClickCloseNewModalShipment = () => {
     setNewShipmentModalOpen(false)
+  }
+
+  // EDIT MODAL
+  const handleClickOpenEditModalShipment = (id: number) => {
+    setElementEdit(id)
+    setEditShipmentModalOpen(true)
+  }
+
+  const handleClickCloseEditModalShipment = () => {
+    setElementEdit(0)
+    setEditShipmentModalOpen(false)
   }
 
   useEffect(() => {
@@ -40,7 +58,7 @@ export default function Home() {
       <section className="flex gap-4">
         <button 
           className="px-5 py-2 bg-green-600 text-white rounded-md hover:brightness-90 device:px-3 device:py-1"
-          onClick={handleClickOpenModalShipment}
+          onClick={handleClickOpenNewModalShipment}
         >
           Novo
         </button>
@@ -81,8 +99,8 @@ export default function Home() {
                     <td className="px-6 py-4 text-center">{new Intl.DateTimeFormat("pt-br").format(new Date(createdat))}</td>
                     <td className="px-6 py-4 text-center">{expedicao}</td>
                     <td className="px-6 py-4 text-center">
-                      <Dropdown label="" style={{width: "100%", display: "flex", flexDirection: "row-reverse"}} target="w-full" className="p-1 bg-zinc-900 rounded-lg">
-                          <Dropdown.Item className="text-white flex gap-2 min-w-40"><FontAwesomeIcon icon={faPenToSquare} size="lg"/>Editar</Dropdown.Item>
+                      <Dropdown label="" style={{width: "100%", display: "flex", flexDirection: "row-reverse", border: "1px solid black"}} target="w-full" className="py-1 bg-zinc-900 rounded-lg">
+                          <Dropdown.Item className="text-white flex gap-2 min-w-40" onClick={() => handleClickOpenEditModalShipment(id)}><FontAwesomeIcon icon={faPenToSquare} size="lg"/>Editar</Dropdown.Item>
                           <Dropdown.Item className="text-white flex gap-2 min-w-40"><FontAwesomeIcon icon={faXmark} size="xl"/>Excluir</Dropdown.Item>
                           <Dropdown.Item className="text-white flex gap-2 min-w-40"><FontAwesomeIcon icon={faCheck} size="lg"/>Finalizar</Dropdown.Item>
                           <Dropdown.Item className="text-white flex gap-2 min-w-40"><FontAwesomeIcon icon={faClock} size="lg"/>Horaríos</Dropdown.Item>
@@ -95,7 +113,8 @@ export default function Home() {
           </table>
         </div>
       </section>
-      <NewShipmentmodal isOpen={newShipmentModalOpen} onRequestClose={handleClickCloseModalShipment} setCarregamentos={setCarregamentos} />
+      <NewShipmentmodal isOpen={newShipmentModalOpen} onRequestClose={handleClickCloseNewModalShipment} setCarregamentos={setCarregamentos} />
+      <EditShipmentModal isOpen={editShipmentModalOpen} onRequestClose={handleClickCloseEditModalShipment} setCarregamentos={setCarregamentos} id={elementEdit} />
     </>
   )
 }
