@@ -13,18 +13,18 @@ export default function Header() {
       <nav className="flex flex-row justify-between gap-8 text-white text-lg device:h-full device:flex-col device:justify-center device:gap-1 device:items-center device:text-base">
         <Dropdown label="Fora Cidade" inline className="p-4 bg-zinc-900 rounded-lg">
           <div className="flex flex-col gap-2">
-            <Dropdown.Item href="/">Carregamentos</Dropdown.Item>
-            <Dropdown.Item href="/teste">teste</Dropdown.Item>
+            <Dropdown.Item className="text-white" href="/">Carregamentos</Dropdown.Item>
+            <Dropdown.Item className="text-white" href="/teste">teste</Dropdown.Item>
             <div className="my-2 h-px bg-gray-100 dark:bg-gray-600"></div>
-            <Dropdown.Item>Manual Usuário</Dropdown.Item>
+            <Dropdown.Item className="text-white">Manual Usuário</Dropdown.Item>
           </div>
         </Dropdown>
         <Dropdown label="Dentro Cidade" inline className="p-4 bg-zinc-900 rounded-lg">
           <div className="flex flex-col gap-2">
-            <Dropdown.Item href="/">Carregamentos</Dropdown.Item>
-            <Dropdown.Item href="/teste">teste</Dropdown.Item>
+            <Dropdown.Item className="text-white" href="/">Carregamentos</Dropdown.Item>
+            <Dropdown.Item className="text-white" href="/teste">teste</Dropdown.Item>
             <div className="my-2 h-px bg-gray-100 dark:bg-gray-600"></div>
-            <Dropdown.Item>Manual Usuário</Dropdown.Item>
+            <Dropdown.Item className="text-white">Manual Usuário</Dropdown.Item>
           </div>
         </Dropdown>
       </nav>

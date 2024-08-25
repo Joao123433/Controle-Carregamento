@@ -1,13 +1,23 @@
 import { faTruckFast } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NewShipmentmodal } from "@/components/NewShipmentModal";
 import Modal from "react-modal"
+import { api } from "@/services/api";
+
+interface carregamentosType {
+  id: number,
+  expedicao: string, 
+  createdat: string,
+  updatedat: string
+}
 
 Modal.setAppElement("#__next")
 
 export default function Home() {
   const [newShipmentModalOpen, setNewShipmentModalOpen] = useState(false)
+  const [carregamentos, setCarregamentos] = useState<carregamentosType[]>([])
+  let count = 0;
 
   const handleClickOpenModalShipment = () => {
     setNewShipmentModalOpen(true)
@@ -16,6 +26,10 @@ export default function Home() {
   const handleClickCloseModalShipment = () => {
     setNewShipmentModalOpen(false)
   }
+
+  useEffect(() => {
+    api.get("carregamento").then(res => setCarregamentos(res.data))
+  }, []) 
 
   return (
     <>
@@ -46,169 +60,39 @@ export default function Home() {
           <table className="w-99 text-sm text-left rtl:text-right text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-zinc-900 dark:text-gray-400">
               <tr>
-                <th scope="col" className="px-6 py-3">Product name</th>
-                <th scope="col" className="px-6 py-3">Color</th>
-                <th scope="col" className="px-6 py-3">Category</th>
-                <th scope="col" className="px-6 py-3">Price</th>
-                <th scope="col" className="px-6 py-3">Action</th>
+                <th scope="col" className="px-6 py-3 text-center">Identificador</th>
+                <th scope="col" className="px-6 py-3 text-center">Data Carregamento</th>
+                <th scope="col" className="px-6 py-3 text-center">Expedição</th>
+                <th scope="col" className="px-6 py-3 text-center">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">Apple MacBook Pro 17</th>
-                <td className="px-6 py-4">Silver</td>
-                <td className="px-6 py-4">Laptop</td>
-                <td className="px-6 py-4">$2999</td>
-                <td className="px-6 py-4">
-                  <select className="text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 outline-none bg-transparent">
-                    <option selected>Choose a country</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                  </select>
-                </td>
-              </tr>
-              <tr className="bg-zinc-700 border-b border-gray-700">
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">Microsoft Surface Pro</th>
-                <td className="px-6 py-4">White</td>
-                <td className="px-6 py-4">Laptop PC</td>
-                <td className="px-6 py-4">$1999</td>
-                <td className="px-6 py-4">
-                  <select className="text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 outline-none bg-transparent">
-                    <option selected className="text-black">Choose a country</option>
-                    <option className="text-black" value="US">United States</option>
-                    <option className="text-black" value="CA">Canada</option>
-                    <option className="text-black" value="FR">France</option>
-                    <option className="text-black" value="DE">Germany</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">Magic Mouse 2</th>
-                <td className="px-6 py-4">Black</td>
-                <td className="px-6 py-4">Accessories</td>
-                <td className="px-6 py-4">$99</td>
-                <td className="px-6 py-4">
-                  <select className="text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 outline-none bg-transparent">
-                    <option selected>Choose a country</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                  </select>
-                </td>
-              </tr>
-              <tr className="bg-zinc-700 border-b border-gray-700">
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">Google Pixel Phone</th>
-                <td className="px-6 py-4">Gray</td>
-                <td className="px-6 py-4">Phone</td>
-                <td className="px-6 py-4">$799</td>
-                <td className="px-6 py-4">
-                  <select className="text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 outline-none bg-transparent">
-                    <option selected>Choose a country</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">Apple Watch 5</th>
-                <td className="px-6 py-4">Red</td>
-                <td className="px-6 py-4">Wearables</td>
-                <td className="px-6 py-4">$999</td>
-                <td className="px-6 py-4">
-                  <select className="text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 outline-none bg-transparent">
-                    <option selected>Choose a country</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                  </select>
-                </td>
-              </tr>
-              <tr className="bg-zinc-700 border-b border-gray-700">
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">Google Pixel Phone</th>
-                <td className="px-6 py-4">Gray</td>
-                <td className="px-6 py-4">Phone</td>
-                <td className="px-6 py-4">$799</td>
-                <td className="px-6 py-4">
-                  <select className="text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 outline-none bg-transparent">
-                    <option selected>Choose a country</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">Apple Watch 5</th>
-                <td className="px-6 py-4">Red</td>
-                <td className="px-6 py-4">Wearables</td>
-                <td className="px-6 py-4">$999</td>
-                <td className="px-6 py-4">
-                  <select className="text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 outline-none bg-transparent">
-                    <option selected>Choose a country</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                  </select>
-                </td>
-              </tr>
-              <tr className="bg-zinc-700 border-b border-gray-700">
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">Google Pixel Phone</th>
-                <td className="px-6 py-4">Gray</td>
-                <td className="px-6 py-4">Phone</td>
-                <td className="px-6 py-4">$799</td>
-                <td className="px-6 py-4">
-                  <select className="text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 outline-none bg-transparent">
-                    <option selected>Choose a country</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">Apple Watch 5</th>
-                <td className="px-6 py-4">Red</td>
-                <td className="px-6 py-4">Wearables</td>
-                <td className="px-6 py-4">$999</td>
-                <td className="px-6 py-4">
-                  <select className="text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 outline-none bg-transparent">
-                    <option selected>Choose a country</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                  </select>
-                </td>
-              </tr>
-              <tr className="bg-zinc-700 border-b border-gray-700">
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">Google Pixel Phone</th>
-                <td className="px-6 py-4">Gray</td>
-                <td className="px-6 py-4">Phone</td>
-                <td className="px-6 py-4">$799</td>
-                <td className="px-6 py-4">
-                  <select className="text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 outline-none bg-transparent">
-                    <option selected>Choose a country</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
-                  </select>
-                </td>
-              </tr>
+              {carregamentos.map(({id, expedicao, createdat}) => {
+                const styling = count % 2 == 0
+                count++
+
+                return (
+                  <tr className={styling ? "bg-zinc-700 border-b border-gray-700" : ""} key={id}>
+                    <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white text-center">{id}</th>
+                    <td className="px-6 py-4 text-center">{new Intl.DateTimeFormat("pt-br").format(new Date(createdat))}</td>
+                    <td className="px-6 py-4 text-center">{expedicao}</td>
+                    <td className="px-6 py-4 text-center">
+                      <select className="text-sm rounded-lg block w-full p-2.5 placeholder-gray-400 outline-none bg-transparent">
+                        <option defaultValue={0} className="text-black">Choose a country</option>
+                        <option className="text-black" value="US">United States</option>
+                        <option className="text-black" value="CA">Canada</option>
+                        <option className="text-black" value="FR">France</option>
+                        <option className="text-black" value="DE">Germany</option>
+                      </select>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>
       </section>
-      <NewShipmentmodal isOpen={newShipmentModalOpen} onRequestClose={handleClickCloseModalShipment} />
+      <NewShipmentmodal isOpen={newShipmentModalOpen} onRequestClose={handleClickCloseModalShipment} setCarregamentos={setCarregamentos} />
     </>
   )
 }

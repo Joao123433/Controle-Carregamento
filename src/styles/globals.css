@@ -31,10 +31,12 @@ html {
 .react-modal-content {
   width: 100%;
   max-width: 800px;
+  max-height: 90vh;
   background-color: rgb(55 65 81);
   padding: 2rem;
   position: relative;
   border-radius: .25rem;
+  overflow-y: auto;
 }
 
 .react-modal-close {
